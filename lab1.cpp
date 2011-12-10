@@ -44,5 +44,6 @@ int main() {
   max = findMaxElement(n, a);
   neighborsCount = countNeighbors(n, a);
   writeResult(a, min, max, neighborsCount); 
+  delete a;
   return 0;
 }
