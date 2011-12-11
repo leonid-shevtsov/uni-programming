@@ -24,25 +24,6 @@ int ** m(int n, int m, ...) {
   return a;
 }
 
-int *  a(int n, ...) {
-  int * a;
-  int i, vc;
-
-  va_list vp;
-
-  va_start(vp, vc);
-
-  a = new int[n];
-
-  for (i=0;i<n;++i) {
-    a[i] = va_arg(vp, int);
-  }
-
-  va_end(vp);
-
-  return a;
-}
-
 TEST(ComputeSums, ComputesSums) {
   int* c = computeSums(2, 2, m( 2, 2,
     1, 2, 

@@ -12,8 +12,8 @@ test: lab1_test lab2_test
 lab1: lab1.cpp lab1_functions.cpp
 	$(CC) $(CPPFLAGS) lab1.cpp lab1_functions.cpp -o bin/lab1
 
-lab2: lab2.cpp lab2_functions.cpp
-	$(CC) $(CPPFLAGS) lab2.cpp lab2_functions.cpp -o bin/lab2
+lab2: lab2.cpp lab2_functions.cpp lab1_functions.cpp
+	$(CC) $(CPPFLAGS) lab2.cpp lab2_functions.cpp lab1_functions.cpp -o bin/lab2
 
 lab1_test: lab1_test.cpp lab1_functions.cpp test_harness.cpp
 	$(CC) $(CPPFLAGS) $(GTEST_FLAGS) lab1_test.cpp lab1_functions.cpp test_harness.cpp -o bin/lab1_test
