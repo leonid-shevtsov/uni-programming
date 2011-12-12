@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "lab2.h"
+#include "formatting.h"
 
 const int MIN_DIMENSIONS = 6;
 
@@ -25,23 +26,6 @@ void readData(int &n, int &m, int **&a) {
   }
 }
 
-void printMatrix(int n, int m, int **a) {
-  for (int i=0; i<n; ++i) {
-    printf("| ");
-    for (int j=0; j<m; ++j) {
-      printf("%6i ", a[i][j]);
-    }
-    printf(" |\n");
-  }
-}
-
-void printArray(int n, int *a) {
-  printf("[ ");
-  for (int i=0; i<n; ++i) {
-    printf("%6i ", a[i]);
-  }
-  printf(" ]\n");
-}
 
 void printResult(int n, int m, int **a, int *c, int minj, int **b) {
   printf("====\n");
