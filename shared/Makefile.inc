@@ -1,22 +1,27 @@
 CPP = g++
-CPPFLAGS = -lstdc++
+CPPFLAGS = -lstdc++ -I.
 
 GTEST_DIR = /Users/leonid/vendor/gtest-1.6.0
 GTEST_FLAGS = -I$(GTEST_DIR)/include -L$(GTEST_DIR)/lib/.libs -lgtest
 GTEST_DYLD_PATH = $(GTEST_DIR)/lib/.libs
 GTEST_ENV = DYLD_LIBRARY_PATH=$(GTEST_DYLD_PATH)
 
+SOURCES = *.cpp
+TEST_SOURCES = ../shared/test_harness.cpp $(filter-out main.cpp, $(shell echo *.cpp)) test/*.cpp
 
-bin/$(APP)$(BINEXT): *.cpp
+BIN = bin/$(APP)$(BINEXT)
+TEST_BIN = bin/$(APP)_test$(BINEXT)
+
+$(BIN): $(SOURCES)
 	mkdir -p bin
-	$(CPP) $(CPPFLAGS) *.cpp -o bin/$(APP)$(BINEXT)
+	$(CPP) $(CPPFLAGS) $(SOURCES) -o $(BIN)
 
-bin/$(APP)_test$(BINEXT): *.cpp test/*.cpp
+$(TEST_BIN): $(TEST_SOURCES)
 	mkdir -p bin
-	$(CPP) $(CPPFLAGS) $(GTEST_FLAGS) *.cpp test/*.cpp bin/$(APP)_test$(BINEXT)
-	$(GTEST_ENV) bin/$(APP)_test$(BINEXT)
+	$(CPP) $(CPPFLAGS) $(GTEST_FLAGS) $(TEST_SOURCES) -o $(TEST_BIN) 
+	$(GTEST_ENV) $(TEST_BIN) 
 
-test: bin/$(APP)_test$(BINEXT)
+test: $(TEST_BIN) 
 
 clean:
 	rm bin/*
