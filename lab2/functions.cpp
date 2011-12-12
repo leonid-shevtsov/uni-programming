@@ -27,3 +27,13 @@ int** transposeMatrix(int n, int m, int **a) {
 
   return b;
 }
+
+int findMinElement(int n, const int *a) {
+  int min = 0;
+  for (int i=1; i < n; ++i) {
+    if (a[i] < a[min]) {
+      min = i;
+    }
+  }
+  return min;
+}

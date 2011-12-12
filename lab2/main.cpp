@@ -1,10 +1,13 @@
 #include <stdio.h>
-#include "lab1.h"
 #include "lab2.h"
 
 const int MIN_DIMENSIONS = 6;
 
 void printHelp() {
+  printf("This program will ask you for a matrix of integers\n");
+  printf("It will compute the sums of values in all columns of the matrix\n");
+  printf("It will find the column with the least sum\n");
+  printf("It will also transpose the matrix and print out the result\n");
 }
 
 void readData(int &n, int &m, int **&a) {
@@ -26,7 +29,7 @@ void printMatrix(int n, int m, int **a) {
   for (int i=0; i<n; ++i) {
     printf("| ");
     for (int j=0; j<m; ++j) {
-      printf("%4i", a[i][j]);
+      printf("%6i ", a[i][j]);
     }
     printf(" |\n");
   }
@@ -35,7 +38,7 @@ void printMatrix(int n, int m, int **a) {
 void printArray(int n, int *a) {
   printf("[ ");
   for (int i=0; i<n; ++i) {
-    printf("%4i", a[i]);
+    printf("%6i ", a[i]);
   }
   printf(" ]\n");
 }
