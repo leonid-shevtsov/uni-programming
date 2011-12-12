@@ -8,3 +8,6 @@ test:
 
 clean:
 	$(foreach dir, $(DIRS), cd $(dir); make clean;cd ..;)
+
+flowchart:
+	$(foreach dir, $(DIRS), cd $(dir); make flowchart;)

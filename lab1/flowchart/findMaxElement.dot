@@ -1,0 +1,29 @@
+digraph findMaxElement {
+  truecolor = true
+  font = "Times New Roman"
+  //label = "Найти максимальный элемент"
+  node [shape = box]
+  edge [weight = 1, labeldistance = 3]
+
+  start [ label="Начало\nДано: массив A[N]", shape = ellipse]
+    
+  n1 [ label= "max_i = 0, i = 1" ]
+  subgraph gg1 {
+    rank=same;
+    n2 [ label= "i < N?", shape = diamond, group = g1]
+    end [ label="Конец\nВернуть max_i", shape = ellipse, group=g1 ]
+  }
+  n3 [ label= "A[i] > A[max_i]?", shape = diamond ]
+  n4 [ label= "max_i = i"]
+  n5 [ label="++i"]
+  
+
+  start -> n1
+  n1 -> n2
+  n2:s -> n3:n [taillabel = "Да", weight = 10]
+  n2:e -> end:w [ taillabel = "Нет", minlen = 3]
+  n3:e -> n4:n [taillabel = "Да", weight = 10]
+  n4:s -> n5:e
+  n3:s -> n5:n [taillabel = "Нет", weight = 10]
+  n5:w -> n2:w
+}

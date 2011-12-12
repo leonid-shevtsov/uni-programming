@@ -21,8 +21,15 @@ $(TEST_BIN): $(TEST_SOURCES)
 	$(CPP) $(CPPFLAGS) $(GTEST_FLAGS) $(TEST_SOURCES) -o $(TEST_BIN) 
 	$(GTEST_ENV) $(TEST_BIN) 
 
+flowchart.dummy:
+	mkdir -p flowchart.out
+	$(foreach dot, $(shell echo flowchart/*.dot), dot -Tsvg $(dot) -o flowchart.out/$(notdir $(basename $(dot))).svg;)
+
 test: $(TEST_BIN) 
+
+flowchart: flowchart.dummy
 
 clean:
 	rm bin/*
+
 

@@ -1,0 +1,30 @@
+digraph lab1 {
+  truecolor = true;
+  font = "Times New Roman";
+  //label = "Лабораторная работа 1";
+  node [shape = box ]
+  
+  start [ label="Начало", shape = ellipse]
+
+  printHelp [ label="Вывести подсказку", shape=parallelogram ]
+
+  readData [ label="Ввод данных", shape=parallelogram ]
+
+  findMinElement[ label="Найти минимальный элемент" ]
+
+  findMaxElement[ label="Найти максимальный элемент" ]
+
+  countNeighbors[ label="Найти число соседей" ]
+
+  writeResult [ label="Вывести результат"]
+
+  end [ label="Конец", shape = ellipse ]
+  
+  start -> printHelp
+  printHelp -> readData
+  readData -> findMinElement
+  findMinElement -> findMaxElement
+  findMaxElement -> countNeighbors
+  countNeighbors -> writeResult
+  writeResult -> end
+}

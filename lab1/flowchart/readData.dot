@@ -1,0 +1,27 @@
+digraph readData {
+  truecolor = true
+  font = "Times New Roman"
+  //label = "Ввод данных"
+  node [shape = box]
+  edge [weight = 10, labeldistance = 2]
+
+  start [ label="Начало", shape = ellipse]
+    
+  enterN [ label="Ввести N", shape=parallelogram ]
+  checkN [ label="N>0 ?", shape=diamond ]
+  enterA1 [ label="i=0" ]
+  enterA2 [ label="Ввести A[i]", shape = parallelogram]
+  enterA3 [ label="++i"]
+  enterA4 [ label="i<N ?", shape=diamond ]
+  
+  
+  end [ label="Конец", shape = ellipse ]
+
+  start -> enterN
+  enterN -> checkN
+  checkN:w -> enterN:w [taillabel = "Нет" , weight = 1]
+  checkN:s -> enterA1  [taillabel = "Да" ]
+  enterA1 -> enterA2 -> enterA3 -> enterA4
+  enterA4:w -> enterA2:w [taillabel = "Да", weight =1]
+  enterA4:s -> end:n [taillabel = "Нет"]
+}
