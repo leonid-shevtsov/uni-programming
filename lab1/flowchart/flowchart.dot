@@ -16,7 +16,7 @@ digraph lab1 {
 
   countNeighbors[ label="Найти число соседей" ]
 
-  writeResult [ label="Вывести результат"]
+  writeResult [ label="Вывести результат", shape=parallelogram]
 
   end [ label="Конец", shape = ellipse ]
   

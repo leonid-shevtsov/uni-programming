@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "lab1.h"
 
 void printHelp() {
@@ -7,12 +8,22 @@ void printHelp() {
   printf("negative number stand next to each other\n\n");
 }
 
+bool readInt(int &i) {
+  char buffer[100];
+  char *ptr;
+  if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+    i = strtol(buffer, &ptr, 10);
+    return buffer[0] != '\n' && (*ptr == '\n' || *ptr == '\0');
+  } else {
+    return false;
+  }
+}
+
 void readData(int &n, int *&a) {
   do {
     printf("Total number of integer elements N = ");
-    scanf("%i", &n);
-    if (n <= 0) {
-      printf("N must be greater than 0\n");
+    if (!readInt(n) || n<0) {
+      printf("N must be a number greater than 0\n");
     }
   } while (n <= 0);
 
@@ -20,7 +31,10 @@ void readData(int &n, int *&a) {
 
   for (int i=0; i<n; ++i) {
     printf("A[%2i] = ", i);
-    scanf("%i", a+i);
+    if (!readInt(a[i])) {
+      printf("A[%2i] must be an integer\n",i);
+      i--;
+    }
   }
 }
 
