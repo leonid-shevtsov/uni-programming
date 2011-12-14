@@ -23,7 +23,7 @@ int findMaxElement(int n, const int *a) {
 int countNeighbors(int n, const int *a) {
   int neighborsCount = 0;
   for (int i=1; i < n; ++i) {
-    if (a[i] * a[i-1] < 0) {
+    if (a[i]<0 && a[i-1]>0 || a[i]>0 && a[i-1]<0) {
       ++neighborsCount;
     }
   }
