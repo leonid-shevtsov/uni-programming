@@ -43,7 +43,10 @@ void readData(int &n, int &m, int **&a) {
     a[i] = new int [m];
     for (int j=0; j<m; ++j) {
       printf("A[%2i][%2i] = ", i, j);
-	  readInt(a[i][j]);
+      if (!readInt(a[i][j])) {
+        printf("A[%2i][%2i] must be an integer\n",i, j);
+        j--;
+      }
     }
   }
 }
