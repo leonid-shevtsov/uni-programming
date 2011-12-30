@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "lab2.h"
 #include "formatting.h"
 
@@ -9,19 +10,40 @@ void printHelp() {
   printf("It will compute the sums of values in all columns of the matrix\n");
   printf("It will find the column with the least sum\n");
   printf("It will also transpose the matrix and print out the result\n");
+  printf("Press Ctrl+C to exit at any time\n\n");
+}
+
+bool readInt(int &i) {
+  char buffer[100];
+  char *ptr;
+  if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+    i = strtol(buffer, &ptr, 10);
+    return buffer[0] != '\n' && (*ptr == '\n' || *ptr == '\0');
+  } else {
+    return false;
+  }
+}
+
+int readDimension(const char *name) {
+  int n = 0;
+  do {
+	printf("%s = ", name);
+    readInt(n);
+	if (n < MIN_DIMENSIONS) printf("%s must be at least %i\n", name, MIN_DIMENSIONS);
+  } while (n < MIN_DIMENSIONS);
+  return n;
 }
 
 void readData(int &n, int &m, int **&a) {
-  printf("Number of rows N = ");
-  scanf("%i", &n);
-  printf("Number of columns M = ");
-  scanf("%i", &m);
+  n = readDimension("Number of rows N");
+  m = readDimension("Number of columns M");
+
   a = new int* [n];
   for (int i=0; i<n; ++i) {
     a[i] = new int [m];
     for (int j=0; j<m; ++j) {
       printf("A[%2i][%2i] = ", i, j);
-      scanf("%i", &a[i][j]);
+	  readInt(a[i][j]);
     }
   }
 }
@@ -42,7 +64,6 @@ int main() {
   int n, m;
   int **a, **b;
   int *c;
-  int i;
   int minj;
 
   printHelp();
@@ -65,6 +86,8 @@ int main() {
   delete a;
   delete b;
   delete c;
+
+  system("pause");
 
   return 0;
 }

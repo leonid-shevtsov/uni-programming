@@ -5,7 +5,8 @@
 void printHelp() {
   printf("This program will show the minimum and maximum elements of an array\n");
   printf("It will also count the number of occurences when a positive and\n");
-  printf("negative number stand next to each other\n\n");
+  printf("negative number stand next to each other\n");
+  printf("Press Ctrl+C to exit at any time\n\n");
 }
 
 bool readInt(int &i) {
@@ -59,5 +60,6 @@ int main() {
   neighborsCount = countNeighbors(n, a);
   writeResult(a, min, max, neighborsCount); 
   delete a;
+  system("pause");
   return 0;
 }
