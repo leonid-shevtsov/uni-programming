@@ -29,8 +29,8 @@ SortFunction* sortFunctions[]= {
   &heapSort};
 const char* sortFunctionNames[] = {
   "stdlib qsort()", 
-  "quick-sort (median pivot)", 
-  "quick-sort (random pivot)", 
+  "median qsort", 
+  "random qsort", 
   "intro-sort",
   "heap-sort"};
 const int sortCount = 5;
@@ -93,7 +93,7 @@ int main() {
         float totalTime = 0;
 
         for (int it=0; it<num_iterations; ++it) {
-          memcpy(data, a, length*sizeof(int));
+          memcpy(a, data, length*sizeof(int));
           std::clock_t const start = std::clock();
           (*sortFunctions[si])(a, length);
           std::clock_t const end = std::clock(); 
