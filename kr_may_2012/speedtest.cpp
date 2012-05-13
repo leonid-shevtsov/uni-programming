@@ -50,6 +50,7 @@ const char* generatorNames[] = {
 };
 const int generatorCount = 5;
 
+// FIXME this doesn't actually convert to seconds. But we don't need seconds, just values on the same scale
 double clock_diff_to_sec(long clock_diff)
 {
     return double(clock_diff) / CLOCKS_PER_SEC;
