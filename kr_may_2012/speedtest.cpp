@@ -101,7 +101,7 @@ int main() {
           totalTime += clock_diff_to_sec(end - start);
         }
 
-        fprintf(csv, ",%0.0f", round(totalTime*1000000/num_iterations));
+        fprintf(csv, ",%0.0f", floor(totalTime*1000000/num_iterations));
 
       }
       fprintf(csv, ",");

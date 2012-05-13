@@ -28,6 +28,6 @@ void introSortPart(int* a, int start, int end, int depthLimit) {
 }
 
 void introSort(int* array, int length) {
-  introSortPart(array, 0, length-1, floor(2*log2(length)));
+  introSortPart(array, 0, length-1, floor(2*log((float)length)));
 }
 
