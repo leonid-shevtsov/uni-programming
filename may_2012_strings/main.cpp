@@ -15,7 +15,7 @@ int main() {
   char source[80]; // 80 chars should be enough for everybody
   unsigned int count;
 
-  printf("String: ");
+  printf("String without spaces: ");
   scanf("%s", source); 
   printf("Reps count: ");
   scanf("%u", &count);
