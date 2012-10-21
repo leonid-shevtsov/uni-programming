@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (course_1)
 
-set (sources main.c passenger_input.c)
+set (sources main.c passenger_structures.c passenger_input.c passenger_logic.c)
 add_executable(passengers ${sources})
 
 if(CMAKE_HOST_WIN32)

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "passenger_structures.h"
 #include "passenger_input.h"
 
 // Helper function to read integer with proper error handling
@@ -18,7 +19,11 @@ int readInt(FILE* file, int *i) {
 int readLine(FILE* file, char** line) {
   char buffer[100];
   if (fgets(buffer, sizeof(buffer), file) != NULL) {
-    (*line) = (char*)malloc(strlen(buffer)+1);
+    // Trim trailing newline & spaces
+    int buf_len = strlen(buffer)-1;
+    while(buf_len>0 && isspace(buffer[buf_len])) buf_len--;
+    buffer[buf_len+1] = 0;
+    (*line) = (char*)malloc(buf_len+1);
     strcpy((*line), buffer);
     return 1;
   } else {
@@ -41,7 +46,9 @@ Passenger* readPassengerFile(FILE* input_file, int* size) {
   int i;
   for (i=0; i<(*size); ++i) {
     if (!readPassenger(input_file, passengers+i)) {
-      free(passengers);
+      // FIXME there is a known memory leak of already allocated strings in the last Passenger instance
+      // Fix ommitted here for clarity
+      freePassengers(passengers, i);
       return NULL;
     }
   }

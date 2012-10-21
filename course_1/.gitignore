@@ -2,3 +2,4 @@ Makefile
 passengers
 passenger_input
 passenger_structures
+output.txt

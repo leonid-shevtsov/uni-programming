@@ -13,4 +13,13 @@ typedef struct {
   int total_weight;
 } Passenger;
 
+typedef struct {
+  const char* flight_no;
+  int passenger_count;
+  Passenger** passengers;
+} Flight;
+
+void freeFlights(Flight* flights, const int size);
+void freePassengers(Passenger* passengers, const int size);
+
 #endif
