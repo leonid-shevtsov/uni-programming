@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "passenger_structures.h"
 #include "passenger_input.h"
 
@@ -23,7 +24,7 @@ int readLine(FILE* file, char** line) {
     int buf_len = strlen(buffer)-1;
     while(buf_len>0 && isspace(buffer[buf_len])) buf_len--;
     buffer[buf_len+1] = 0;
-    (*line) = (char*)malloc(buf_len+1);
+    (*line) = new char[buf_len+1];
     strcpy((*line), buffer);
     return 1;
   } else {
@@ -42,7 +43,7 @@ Passenger* readPassengerFile(FILE* input_file, int* size) {
   if ((*size)<0) {
     return NULL;
   }
-  Passenger* passengers = (Passenger*)malloc(sizeof(Passenger)*(*size));
+  Passenger* passengers = new Passenger[*size];
   int i;
   for (i=0; i<(*size); ++i) {
     if (!readPassenger(input_file, passengers+i)) {

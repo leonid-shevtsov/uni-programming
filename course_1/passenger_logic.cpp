@@ -4,7 +4,7 @@
 
 Flight* mapFlights(Passenger* passengers, const int size, int *flights_size) {
   // Yep, not very effective. But this is the max possible number of flights
-  Flight* flights = malloc(sizeof(Flight)*size);
+  Flight* flights = new Flight[size];
   *flights_size = 0;
   int i, j;
 
@@ -17,7 +17,7 @@ Flight* mapFlights(Passenger* passengers, const int size, int *flights_size) {
     if (j == *flights_size) { // didn't find a flight in the map; initialize new
       flights[j].flight_no = passengers[i].flight_no;
       flights[j].passenger_count= 0;
-      flights[j].passengers = malloc(sizeof(Passenger*)*size); // also not very effective
+      flights[j].passengers = new Passenger*[size]; // also not very effective
       (*flights_size)++;
     }
     flights[j].passengers[flights[j].passenger_count++] = passengers+i;
@@ -66,7 +66,7 @@ Passenger* passengerWithMaxItems(Passenger* passengers, const int size) {
 }
 
 char* fullName(Name* name) {
-  char* full_name = malloc(strlen(name->first_name) + strlen(name->last_name) + 2);
+  char* full_name = new char[strlen(name->first_name) + strlen(name->last_name) + 2];
   strcpy(full_name, name->first_name);
   strcat(full_name, " ");
   strcat(full_name, name->last_name);
