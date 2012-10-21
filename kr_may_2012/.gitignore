@@ -1,2 +1,6 @@
 *.csv
 Makefile
+intro_sort
+quick_sort
+random_quick_sort
+speedtest
