@@ -65,6 +65,14 @@ Passenger* passengerWithMaxItems(Passenger* passengers, const int size) {
   return max_passenger;
 }
 
+char* fullName(Name* name) {
+  char* full_name = malloc(strlen(name->first_name) + strlen(name->last_name) + 2);
+  strcpy(full_name, name->first_name);
+  strcat(full_name, " ");
+  strcat(full_name, name->last_name);
+  return full_name;
+}
+
 void printFlight(FILE* output_file, Flight* flight) {
   int i;
 
@@ -73,10 +81,7 @@ void printFlight(FILE* output_file, Flight* flight) {
   fprintf(output_file, "List of passengers\n%20s | %10s\n", "Name", "B. weight");
 
   for (i=0; i < flight->passenger_count; ++i) {
-    char* full_name = malloc(strlen(flight->passengers[i]->name.first_name) + strlen(flight->passengers[i]->name.last_name) + 2);
-    strcpy(full_name, flight->passengers[i]->name.first_name);
-    strcat(full_name, " ");
-    strcat(full_name, flight->passengers[i]->name.last_name);
+    char* full_name = fullName(&flight->passengers[i]->name);
     fprintf(output_file, "%20s | %10i\n", full_name, flight->passengers[i]->total_weight);
     free(full_name);
   }
