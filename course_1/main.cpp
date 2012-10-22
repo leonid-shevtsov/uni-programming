@@ -24,6 +24,7 @@ void printResults(const char* filename, Passenger* max_passenger, Flight* max_fl
 }
 
 int main(int argc, const char** argv) {
+  // Initialization
   if (argc < 3) {
     printBanner();
     return -1;
@@ -35,12 +36,25 @@ int main(int argc, const char** argv) {
 
   readData(argv[1], &passengers, &passengers_size);
 
+  // Error handling
+  if (passengers == NULL) {
+    printf("Incorrect passenger file format.\n");
+    return -1;
+  }
+  if (passengers_size == 0) {
+    printf("Passenger file must contain at least one record.\n");
+    return -1;
+  }
+
+  // Core logic
   max_passenger = passengerWithMaxItems(passengers, passengers_size);
   flights = mapFlights(passengers, passengers_size, &flights_size);
   max_flight = flightWithMaxWeight(flights, flights_size);
 
+  // Output
   printResults(argv[2], max_passenger, max_flight);
 
+  // Finalization
   freeFlights(flights, flights_size);
   freePassengers(passengers, passengers_size);
   return 0;

@@ -36,6 +36,17 @@ int readName(FILE* file, Name* name) {
   return readLine(file, &name->first_name) && readLine(file, &name->last_name);
 }
 
+// TODO while it would be nice to provide custom error messages,
+// this functionality is out of scope of this coursework
+int validatePassenger(Passenger* passenger) {
+  return
+    (strlen(passenger->name.first_name) > 0) &&
+    (strlen(passenger->name.last_name) > 0) &&
+    (strlen(passenger->flight_no) > 0) &&
+    (passenger->total_weight >= 0) &&
+    (passenger->items_count >= 0);
+}
+
 Passenger* readPassengerFile(FILE* input_file, int* size) {
   if (!readInt(input_file, size)) {
     return NULL; // bad file format
@@ -48,8 +59,13 @@ Passenger* readPassengerFile(FILE* input_file, int* size) {
   for (i=0; i<(*size); ++i) {
     if (!readPassenger(input_file, passengers+i)) {
       // FIXME there is a known memory leak of already allocated strings in the last Passenger instance
-      // Fix ommitted here for clarity
+      // Fix omitted here for clarity
       freePassengers(passengers, i);
+      return NULL;
+    }
+    if (!validatePassenger(passengers+i)) {
+      // The current passenger must also be disposed of
+      freePassengers(passengers, i+1);
       return NULL;
     }
   }
