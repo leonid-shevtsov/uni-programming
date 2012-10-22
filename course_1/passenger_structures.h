@@ -19,7 +19,12 @@ typedef struct {
   Passenger** passengers;
 } Flight;
 
+// (in) flights: the flights array
+// (in) size: size of the flights array
 void freeFlights(Flight* flights, const int size);
+
+// (in) passengers: the passengers array
+// (in) size: size of the passengers array
 void freePassengers(Passenger* passengers, const int size);
 
 #endif
