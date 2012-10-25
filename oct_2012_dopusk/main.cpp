@@ -12,7 +12,7 @@ void random_array(float* a, int size_a) {
 
 void print_array(float* a, int size_a) {
   for (int i=0; i<size_a; ++i) {
-    printf("A[%i] = %0.2f\number", i, a[i]);
+    printf("A[%i] = %0.2f\n", i, a[i]);
   }
 }
 
