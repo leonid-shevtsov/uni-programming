@@ -9,20 +9,20 @@ protected:
   int size_b;
 };
 
-TEST_F(ArrayTest, WithEmptyArray) {
+TEST_F(ArrayTest, SortedWithEmptyArray) {
   size_a = 0;
   size_b = non_unique_sorted(a, size_a, b);
   ASSERT_EQ(0, size_b);
 };
 
-TEST_F(ArrayTest, WithSingleElement) {
+TEST_F(ArrayTest, SortedWithSingleElement) {
   size_a = 1;
   a[0] = 1;
   size_b = non_unique_sorted(a, size_a, b);
   ASSERT_EQ(0, size_b);
 };
 
-TEST_F(ArrayTest, WithTwoDifferentElements) {
+TEST_F(ArrayTest, SortedWithTwoDifferentElements) {
   size_a = 2;
   a[0] = 1;
   a[1] = 2;
@@ -30,7 +30,7 @@ TEST_F(ArrayTest, WithTwoDifferentElements) {
   ASSERT_EQ(0, size_b);
 }
 
-TEST_F(ArrayTest, WithTwoEqualElements) {
+TEST_F(ArrayTest, SortedWithTwoEqualElements) {
   size_a = 2;
   a[0] = 1;
   a[1] = 1;
@@ -39,7 +39,7 @@ TEST_F(ArrayTest, WithTwoEqualElements) {
   ASSERT_EQ(1, b[0]);
 }
 
-TEST_F(ArrayTest, WithThreeEqualElements) {
+TEST_F(ArrayTest, SortedWithThreeEqualElements) {
   size_a = 3;
   a[0] = 1;
   a[1] = 1;
@@ -49,7 +49,7 @@ TEST_F(ArrayTest, WithThreeEqualElements) {
   ASSERT_EQ(1, b[0]);
 }
 
-TEST_F(ArrayTest, WithTwoPairs) {
+TEST_F(ArrayTest, SortedWithTwoPairs) {
   size_a = 4;
   a[0] = 1;
   a[1] = 1;
