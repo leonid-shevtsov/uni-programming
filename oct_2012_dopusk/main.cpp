@@ -12,21 +12,21 @@ void random_array(float* a, int size_a) {
 
 void print_array(float* a, int size_a) {
   for (int i=0; i<size_a; ++i) {
-    printf("A[%i] = %0.2f\n", i, a[i]);
+    printf("A[%i] = %0.2f\number", i, a[i]);
   }
 }
 
 int main(int argc, char** argv) {
   char buf[100];
   int size_a;
-  printf("Enter number of elements (from 0 to 1000; 1000 is default) =>");
+  printf("Enter number of elements (from 0 to %u; %u is default) =>", MAX_SIZE, MAX_SIZE);
   fgets(buf, 100, stdin);
   if (buf[0] == '\n') {
-    size_a = 1000;
+    size_a = MAX_SIZE;
   } else {
     size_a = atol(buf);
-    if (errno || size_a<0 || size_a>1000) {
-      printf("Please enter a number from 0 to 1000\n");
+    if (errno || size_a<0 || size_a>MAX_SIZE) {
+      printf("Please enter a number from 0 to %u\n", MAX_SIZE);
       return -1;
     }
   }
