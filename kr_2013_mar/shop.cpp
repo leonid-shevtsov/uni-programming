@@ -1,5 +1,6 @@
 #include <cstring>
 #include <iomanip>
+#include <fstream>
 #include "shop.h"
 
 Shop::Shop(const char* _name, const char* _manager, int _number, float _salesArea, float _warehouseArea):
@@ -95,4 +96,54 @@ Shop* Shop::readFromFile(istream& is) {
   warehouseArea = strtof(buffer, &ptr);
 
   return new Shop(name, manager, number, salesArea, warehouseArea);
+}
+
+Shop** readShopsFile(int &shopCount) {
+  Shop** shopList = NULL;
+  shopCount=0;
+
+  fstream shopsFile;
+  shopsFile.open("shops.txt", fstream::in);
+
+  while (1) {
+    // fix error with last shop not moving to EOF, by reading one char ahead
+    char lastchar;
+    shopsFile.read(&lastchar, 1);
+    if (shopsFile.eof())  {
+      break;
+    } else {
+      shopsFile.putback(lastchar);
+    }
+
+    if (!shopList) {
+      ++shopCount;
+      shopList = (Shop**) malloc(sizeof(Shop*));
+    } else {
+      // Grow array by another element. Not most efficient with memory, but avoids reading file twice
+      // (which also requires allocating memory).
+      shopList = (Shop**) realloc(shopList, sizeof(Shop*)*(++shopCount));
+    }
+
+    *(shopList+shopCount-1) = Shop::readFromFile(shopsFile);
+  }
+
+  shopsFile.close();
+
+  return shopList;
+}
+
+int shopComparator(const void* shop1, const void* shop2) {
+  return strcmp((*(Shop**)shop1)->getName(), (*(Shop**)shop2)->getName());
+}
+
+void sortShopList(Shop** shopList, int shopCount) {
+  qsort(shopList, shopCount, sizeof(Shop*), &shopComparator);
+}
+
+void printShopList(Shop** shopList, int shopCount) {
+  for (int i=0; i<shopCount; ++i) {
+    cout << "=== Shop #"<<i+1<<endl;
+    cout << **(shopList+i);
+  }
+  cout << "====== End of shops file " << endl << endl;
 }

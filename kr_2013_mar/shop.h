@@ -34,5 +34,8 @@ private:
   float warehouseArea;
 };
 
+Shop** readShopsFile(int &shopCount);
+void sortShopList(Shop** shopList, int shopCount);
+void printShopList(Shop** shopList, int shopCount);
 
 #endif

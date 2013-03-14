@@ -59,52 +59,20 @@ void appendToFile() {
   cout << "File updated!" << endl;
 }
 
-int shopComparator(const void* shop1, const void* shop2) {
-  return strcmp((*(Shop**)shop1)->getName(), (*(Shop**)shop2)->getName());
-}
 
 void printFile() {
   Shop** shopList = NULL;
   int shopCount=0, i;
 
-  fstream shopsFile;
-  shopsFile.open("shops.txt", fstream::in);
-
-  while (1) {
-    // fix error with last shop not moving to EOF, by reading one char ahead
-    char lastchar;
-    shopsFile.read(&lastchar, 1);
-    if (shopsFile.eof())  {
-      break;
-    } else {
-      shopsFile.putback(lastchar);
-    }
-
-    if (!shopList) {
-      ++shopCount;
-      shopList = (Shop**) malloc(sizeof(Shop*));
-    } else {
-      shopList = (Shop**) realloc(shopList, sizeof(Shop*)*(++shopCount));
-    }
-
-    *(shopList+shopCount-1) = Shop::readFromFile(shopsFile);
-  }
-
-  shopsFile.close();
+  shopList = readShopsFile(shopCount);
 
   if (shopCount > 0) {
-    qsort(shopList, shopCount, sizeof(Shop*), &shopComparator);
-
-    for (i=0; i<shopCount; ++i) {
-      cout << "=== Shop #"<<i+1<<endl;
-      cout << **(shopList+i);
-    }
-    cout << "====== End of shops file " << endl << endl;
+    sortShopList(shopList, shopCount);
+    printShopList(shopList, shopCount);
 
     for (i=0; i<shopCount; ++i) {
       delete *(shopList+i);
     }
-
     free(shopList);
   } else {
     cout << "Shops.txt is empty!" << endl;
