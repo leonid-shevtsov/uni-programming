@@ -22,6 +22,10 @@ public:
   void setWarehouseArea(float warehouseArea);
 
   friend ostream& operator<<(ostream& os, const Shop& shop);
+
+  ostream& writeToFile(ostream& os);
+  static Shop* readFromFile(istream& is);
+
 private:
   char* name;
   char* manager;

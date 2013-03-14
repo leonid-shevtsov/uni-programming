@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (shops)
 
-set (sources main.cpp shop.cpp)
+set (sources main.cpp shop.cpp menu.cpp)
 add_executable(shops ${sources})
 
 if(CMAKE_HOST_WIN32)
