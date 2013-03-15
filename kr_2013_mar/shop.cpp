@@ -3,13 +3,23 @@
 #include <fstream>
 #include "shop.h"
 
-Shop::Shop(const char* _name, const char* _manager, int _number, float _salesArea, float _warehouseArea):
+Shop::Shop(const char* _name, const char* _manager,
+  int _number, float _salesArea, float _warehouseArea):
   number(_number),
   salesArea(_salesArea),
   warehouseArea(_warehouseArea)
 {
   name = strdup(_name);
   manager = strdup(_manager);
+}
+
+Shop::Shop(const Shop &shop):
+  number(shop.number),
+  salesArea(shop.salesArea),
+  warehouseArea(shop.warehouseArea)
+{
+  name = strdup(shop.name);
+  manager = strdup(shop.manager);
 }
 
 Shop::~Shop() {
@@ -119,7 +129,8 @@ Shop** readShopsFile(int &shopCount) {
       ++shopCount;
       shopList = (Shop**) malloc(sizeof(Shop*));
     } else {
-      // Grow array by another element. Not most efficient with memory, but avoids reading file twice
+      // Grow array by another element. Not most efficient with memory,
+      // but avoids reading file twice
       // (which also requires allocating memory).
       shopList = (Shop**) realloc(shopList, sizeof(Shop*)*(++shopCount));
     }
