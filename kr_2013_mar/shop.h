@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+// Task 1
+
 class Shop {
 public:
   Shop(const char* name, const char* manager, int number, float salesArea, float warehouseArea);
@@ -26,6 +28,8 @@ public:
   ostream& writeToFile(ostream& os);
   static Shop* readFromFile(istream& is);
 
+  virtual void print();
+
 private:
   char* name;
   char* manager;
@@ -37,5 +41,23 @@ private:
 Shop** readShopsFile(int &shopCount);
 void sortShopList(Shop** shopList, int shopCount);
 void printShopList(Shop** shopList, int shopCount);
+
+// Task 2
+
+class Pharmacy: public Shop {
+public:
+  Pharmacy(const char* name, const char* manager, int number, float salesArea, float warehouseArea);
+  ~Pharmacy();
+  virtual void print();
+};
+
+class GroceryShop: public Shop {
+public:
+  GroceryShop(const char* name, const char* manager, int number, float salesArea, float warehouseArea);
+  ~GroceryShop();
+  virtual void print();
+};
+
+void view(Shop* shop);
 
 #endif

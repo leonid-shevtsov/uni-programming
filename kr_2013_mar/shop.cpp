@@ -147,3 +147,29 @@ void printShopList(Shop** shopList, int shopCount) {
   }
   cout << "====== End of shops file " << endl << endl;
 }
+
+// Task 2
+
+Pharmacy::Pharmacy(const char* name, const char* manager, int number, float salesArea, float warehouseArea)
+    :Shop(name, manager, number, salesArea, warehouseArea) {};
+
+
+GroceryShop::GroceryShop(const char* name, const char* manager, int number, float salesArea, float warehouseArea)
+    :Shop(name, manager, number, salesArea, warehouseArea) {}
+
+
+void view(Shop* shop) {
+  shop->print();
+}
+
+void Shop::print() {
+  cout << "I'm a shop!" << endl;
+}
+
+void Pharmacy::print() {
+  cout << "I'm a pharmacy!" << endl;
+}
+
+void GroceryShop::print() {
+  cout << "I'm a grocery shop!" << endl;
+}

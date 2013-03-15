@@ -85,6 +85,15 @@ void wipeFile() {
   shopsFile.close();
 }
 
+void testInheritance() {
+  Shop* pharmacy = new Pharmacy("Pharmacy", "John Doe", 1,2,3);
+  Shop* grocery = new GroceryShop("Grocery", "John Doe", 1,2,3);
+  view(pharmacy);
+  cout << pharmacy;
+  view(grocery);
+  cout << grocery;
+}
+
 const MenuItem mainMenu[] = {
     {"Change shop name", &changeName},
     {"Change manager name", &changeManager},
@@ -93,13 +102,14 @@ const MenuItem mainMenu[] = {
     {"Change warehouse area", &changeWarehouseArea},
     {"Append this shop to file (shops.txt)", &appendToFile},
     {"Print list of shops in file ordered by name (shops.txt)", &printFile},
-    {"Wipe file (shops.txt)", &wipeFile}
+    {"Wipe file (shops.txt)", &wipeFile},
+    {"Test inheritance", &testInheritance}
   };
 
 int main(int argc, char** argv) {
   theShop = new Shop("John's shop", "John Doe", 123, 100, 300);
 
-  runMenu(mainPrompt, mainMenu, 8);
+  runMenu(mainPrompt, mainMenu, 9);
 
   delete theShop;
   return 0;
