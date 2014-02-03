@@ -1,0 +1,35 @@
+digraph binarySearch {
+  label = "Binary search"
+  node [ shape = box ]
+  edge [ weight= 1]
+
+  subgraph maincol {
+    edge [ weight = 10 ]
+
+    start [ label = "Begin", shape = ellipse ]
+    data [ label = "A[N] (sorted), V" ]
+    assignVars [ label = "L=1; R=N" ]
+    compareVars [ label = "R>=L ? ", shape = diamond ]
+
+    middle [ label = "M = (L+R)/2" ]
+
+    middleLarger [ label = "A[M] > V ?", shape = diamond ]
+    middleSmaller [ label = "A[M] < V ?", shape = diamond ]
+    exitFound [ label = "End; return M", shape = ellipse ]
+  }
+
+  goLeft [ label = "R = M-1" ]
+  goRight [ label = "L = M+1" ]
+  exit [ label = "End; not found", shape = ellipse]
+
+  start -> data -> assignVars -> compareVars
+  compareVars:e -> exit:w
+  compareVars:s -> middle
+  middle:s -> middleLarger:n
+  middleLarger:s -> middleSmaller:n
+  middleSmaller:s -> exitFound:n
+  middleLarger:w -> goLeft:s
+  goLeft:n -> compareVars:w
+  middleSmaller:w -> goRight:s
+  goRight:n -> compareVars:w
+}

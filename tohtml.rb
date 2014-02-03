@@ -1,4 +1,4 @@
-source_code = Dir["*.cpp"] + Dir["*.h"]
+source_code = Dir["*.cpp"] + Dir["*.h"] + Dir["*.html"] + Dir["*.css"] + Dir["*.php"] + Dir["*.pl"]
 
 puts "<!DOCTYPE html><html><body>"
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf8" />
+    <title>Форма</title>
+    <script>
+      function validateForm() {
+        if (document.getElementById('required_input').value=='') {
+          alert('Text field is required');
+          return false;
+        } else {
+          return true;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Форма</h1>
+    <form action="lab5.pl" method="post" onsubmit="return validateForm();">
+      Text (required) <input type="text" name="text" id="required_input" /><br>
+      Password<input type="password" name="password" /><br>
+      Textarea <textarea name="textarea"></textarea><br>
+      Checkbox <input type="checkbox" name="checkbox" /><br>
+      Radio <input type="radio" name="radio" /><br>
+      Radio <input type="radio" name="radio" /><br>
+      Select <select name="select"><option val="1">one</option><option val="2">two</option></select><br>
+      <input type="submit" name="submit1" value="Submit 1">
+      <input type="submit" name="submit2" value="Submit 2">
+    </form>
+  </body>
+</html>

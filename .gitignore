@@ -7,4 +7,5 @@ CMakeCache.txt
 *.manifest
 *.res
 *.resource.txt
-
+*.o
+*.out
